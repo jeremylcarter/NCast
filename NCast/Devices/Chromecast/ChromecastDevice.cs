@@ -44,21 +44,29 @@ namespace NCast.Devices
         public string BaseUrl { get; set; }
         public DeviceType Type { get; set; }
 
-        public async Task<ChromecastDetail> GetDetail()
+        public async Task<DeviceInfo> GetDetail()
         {
-            var detail = new ChromecastDetail();
-
-            var httpClient = new HttpClient();
-            var uri = new Uri(String.Format("{0}/setup/eureka_info", this.BaseUrl));
-
-            var response = await httpClient.GetAsync(uri);
-            if (response.StatusCode == HttpStatusCode.OK)
+            try
             {
-                var stream = await response.Content.ReadAsStreamAsync();
-                var obj = new DataContractJsonSerializer(typeof(DeviceInfo)).ReadObject(stream);  
-            }
+                var detail = new DeviceInfo();
 
-            return detail;
+                var httpClient = new HttpClient();
+                var uri = new Uri(String.Format("{0}/setup/eureka_info", this.BaseUrl));
+
+                var response = await httpClient.GetAsync(uri);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    detail = (DeviceInfo)new DataContractJsonSerializer(typeof(DeviceInfo)).ReadObject(stream);
+                }
+
+                return detail;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+           
         }
     }
 }

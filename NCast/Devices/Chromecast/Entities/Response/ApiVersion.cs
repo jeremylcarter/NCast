@@ -11,6 +11,6 @@ namespace NCast.Devices.Chromecast.Entities.Response
     public class ChromecastApiVersion
     {
         [DataMember(IsRequired = true, Name = "version")]
-        public int version { get; set; }
+        public int Version { get; set; }
     }
 }

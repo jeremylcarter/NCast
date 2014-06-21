@@ -11,10 +11,10 @@ namespace NCast.Devices.Chromecast.Entities.Response
     public class SupportedLocale
     {
         [DataMember(IsRequired = true, Name = "locale")]
-        public string locale { get; set; }
+        public string Locale { get; set; }
 
         [DataMember(IsRequired = true, Name = "display_string")]
-        public string display_string { get; set; }
+        public string DisplayString { get; set; }
     }
 
 }

@@ -12,12 +12,12 @@ namespace NCast.Devices.Chromecast.Entities.Response
     public class Sign
     {
         [DataMember(IsRequired = true, Name = "certificate")]
-        public string certificate { get; set; }
+        public string Certificate { get; set; }
 
         [DataMember(IsRequired = true, Name = "nonce")]
-        public string nonce { get; set; }
+        public string Nonce { get; set; }
 
         [DataMember(IsRequired = true, Name = "signed_data")]
-        public string signed_data { get; set; }
+        public string SignedData { get; set; }
     }
 }

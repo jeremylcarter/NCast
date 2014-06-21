@@ -12,12 +12,12 @@ namespace NCast.Devices.Chromecast.Entities.Response
     public class Location
     {
         [DataMember(IsRequired = false, Name = "country_code")]
-        public string country_code { get; set; }
+        public string CountryCode { get; set; }
 
         [DataMember(IsRequired = false, Name = "latitude")]
-        public double latitude { get; set; }
+        public double Latitude { get; set; }
 
         [DataMember(IsRequired = false, Name = "longitude")]
-        public double longitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

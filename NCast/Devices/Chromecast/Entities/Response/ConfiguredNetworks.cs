@@ -11,9 +11,9 @@ namespace NCast.Devices.Chromecast.Entities.Response
     public class ConfiguredNetworks
     {
         [DataMember(IsRequired = true, Name = "ssid")]
-        public string ssid { get; set; }
+        public string Ssid { get; set; }
 
         [DataMember(IsRequired = true, Name = "wpa_id")]
-        public int wpa_id { get; set; }
+        public int WpaId { get; set; }
     }
 }

@@ -11,12 +11,12 @@ namespace NCast.Devices.Chromecast.Entities.Response
     public class SupportedTimezone
     {
         [DataMember(IsRequired = true, Name = "timezone")]
-        public string timezone { get; set; }
+        public string Timezone { get; set; }
 
         [DataMember(IsRequired = true, Name = "display_string")]
-        public string display_string { get; set; }
+        public string DisplayString { get; set; }
 
         [DataMember(IsRequired = true, Name = "offset")]
-        public int offset { get; set; }
+        public int Offset { get; set; }
     }
 }

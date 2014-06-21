@@ -11,12 +11,12 @@ namespace NCast.Devices.Chromecast.Entities.Response
     public class OptIn
     {
         [DataMember(IsRequired = false, Name = "stats")]
-        public bool? stats { get; set; }
+        public bool? Stats { get; set; }
 
         [DataMember(IsRequired = false, Name = "crash")]
-        public bool? crash { get; set; }
+        public bool? Crash { get; set; }
 
         [DataMember(IsRequired = false, Name = "device_id")]
-        public bool? device_id { get; set; }
+        public bool? DeviceId { get; set; }
     }
 }

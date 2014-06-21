@@ -11,72 +11,72 @@ namespace NCast.Devices.Chromecast.Entities.Response
     public class DeviceInfo
     {
         [DataMember(IsRequired = false, Name = "version")]
-        public int version { get; set; }
+        public int Version { get; set; }
 
         [DataMember(IsRequired = true, Name = "name")]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [DataMember(IsRequired = true, Name = "build_version")]
-        public string system_version { get; set; }
+        public string SystemVersion { get; set; }
 
         [DataMember(IsRequired = true, Name = "has_update")]
-        public bool has_update { get; set; }
+        public bool HasUpdate { get; set; }
 
         [DataMember(IsRequired = true, Name = "ssdp_udn")]
-        public Guid ssdp_udn { get; set; }
+        public Guid SsdpUdn { get; set; }
 
         [DataMember(IsRequired = true, Name = "mac_address")]
-        public string mac_address { get; set; }
+        public string MacAddress { get; set; }
 
         [DataMember(IsRequired = false, Name = "hotspot_bssid")]
-        public string hotspot_bssid { get; set; }
+        public string HotspotBssid { get; set; }
 
         [DataMember(IsRequired = false, Name = "ip_address")]
-        public string ip_address { get; set; }
+        public string IpAddress { get; set; }
 
         [DataMember(IsRequired = true, Name = "connected")]
-        public bool connected { get; set; }
+        public bool Connected { get; set; }
 
         [DataMember(IsRequired = true, Name = "ssid")]
-        public string ssid { get; set; }
+        public string Ssid { get; set; }
 
         [DataMember(IsRequired = true, Name = "wpa_state")]
-        public WpaState wpa_state { get; set; }
+        public WpaState WpaState { get; set; }
 
         [DataMember(IsRequired = true, Name = "setup_state")]
-        public SetupState setup_state { get; set; }
+        public SetupState SetupState { get; set; }
 
         [DataMember(IsRequired = true, Name = "wpa_configured")]
-        public bool wpa_configured { get; set; }
+        public bool WpaConfigured { get; set; }
 
         [DataMember(IsRequired = false, Name = "wpa_id")]
-        public int wpa_id { get; set; }
+        public int WpaId { get; set; }
 
         [DataMember(IsRequired = false, Name = "signal_level")]
-        public int signal_level { get; set; }
+        public int SignalLevel { get; set; }
 
         [DataMember(IsRequired = false, Name = "public_key")]
-        public string public_key { get; set; }
+        public string PublicKey { get; set; }
 
         [DataMember(IsRequired = false, Name = "timezone")]
-        public string timezone { get; set; }
+        public string Timezone { get; set; }
 
         [DataMember(IsRequired = false, Name = "locale")]
-        public string locale { get; set; }
+        public string Locale { get; set; }
 
         [DataMember(IsRequired = false, Name = "location")]
-        public Location location { get; set; }
+        public Location Location { get; set; }
 
         [DataMember(IsRequired = false, Name = "opt_in")]
-        public OptIn opt_in { get; set; }
+        public OptIn OptIn { get; set; }
 
         [DataMember(IsRequired = false, Name = "uptime")]
-        public float uptime { get; set; }
+        public float Uptime { get; set; }
 
         [DataMember(IsRequired = false, Name = "sign")]
-        public Sign sign { get; set; }
+        public Sign Sign { get; set; }
 
         [DataMember(IsRequired = false, Name = "time_format")]
-        public int time_format { get; set; }
+        public int TimeFormat { get; set; }
     }
 }
