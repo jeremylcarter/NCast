@@ -1,0 +1,4 @@
+c:\users\jeremy\documents\visual studio 2013\Projects\NCast\NCast\bin\Debug\NCast.dll
+c:\users\jeremy\documents\visual studio 2013\Projects\NCast\NCast\bin\Debug\NCast.pdb
+c:\users\jeremy\documents\visual studio 2013\Projects\NCast\NCast\obj\Debug\NCast.dll
+c:\users\jeremy\documents\visual studio 2013\Projects\NCast\NCast\obj\Debug\NCast.pdb
