@@ -61,5 +61,9 @@ namespace NCast.Discovery
 
         }
 
+        public override string ToString()
+        {
+            return String.Format("{0} ({1}) @ {2}", Name, DeviceType, EndPoint);
+        }
     }
 }

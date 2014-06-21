@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NCast.Discovery;
+using NCast.Devices;
 
 namespace NCast.TestApplication
 {
@@ -26,7 +27,7 @@ namespace NCast.TestApplication
         {
             lstDeviceList.InvokeIfRequired(() =>
             {
-                lstDeviceList.Items.Add(args.Response.Name + " ("+ args.Response.DeviceType + ") @ " + args.Response.EndPoint);
+                lstDeviceList.Items.Add(args.Response);
             });
         }
 
@@ -51,6 +52,18 @@ namespace NCast.TestApplication
         {
            
 
+        }
+
+        private async void lstDeviceList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var item = (SSDPResponse) lstDeviceList.SelectedItem;
+            if (item != null && item.DeviceType == DeviceType.Chromecast)
+            {
+                var chromeCast = new ChromecastDevice(item);
+
+                var info = await chromeCast.GetDetail();
+
+            }
         }
     }
 }

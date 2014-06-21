@@ -42,6 +42,7 @@
             this.lstDeviceList.Name = "lstDeviceList";
             this.lstDeviceList.Size = new System.Drawing.Size(316, 225);
             this.lstDeviceList.TabIndex = 0;
+            this.lstDeviceList.SelectedIndexChanged += new System.EventHandler(this.lstDeviceList_SelectedIndexChanged);
             // 
             // groupBox1
             // 
