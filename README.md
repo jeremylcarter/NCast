@@ -26,4 +26,35 @@ private void OnDeviceDiscovered(object sender, SSDPDiscoveredDeviceEventArgs arg
 }
 ```
 
+Creating a client
+```c#
+ChromecastClient = new ChromecastClient(item.Address, 8009);
+```
+
+Launching an application
+```c#
+var connection = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.tp.connection");
+var heartbeat = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.tp.heartbeat");
+var receiver = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.receiver");
+
+await ChromecastClient.Connect();
+ChromecastClient.Listen();
+
+connection.OnMessageReceived += OnData;
+receiver.OnMessageReceived += OnData;
+heartbeat.OnMessageReceived += OnData;
+
+// Send the connect message
+ChromecastClient.Write(MessageFactory.Connect());
+
+// Launch the YouTube application
+ChromecastClient.Write(MessageFactory.Launch("YouTube"));
+
+// Start a 5 second heartbeat
+ChromecastClient.StartHeartbeat();
+```
+
+
+![alt tag](http://i.imgur.com/XalK9X9.png)
+
 Uses the https://github.com/tmds/Tmds.MDns library under the LGPL license.
