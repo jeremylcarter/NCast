@@ -25,3 +25,5 @@ private void OnDeviceDiscovered(object sender, SSDPDiscoveredDeviceEventArgs arg
     }
 }
 ```
+
+[Imgur](http://i.imgur.com/XalK9X9.png)
