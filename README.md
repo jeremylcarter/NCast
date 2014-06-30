@@ -25,3 +25,5 @@ private void OnDeviceDiscovered(object sender, SSDPDiscoveredDeviceEventArgs arg
     }
 }
 ```
+
+Uses the https://github.com/tmds/Tmds.MDns library under the LGPL license.

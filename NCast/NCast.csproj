@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="protobuf-net">
+      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -67,8 +70,32 @@
     <Compile Include="Devices\IDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="SSDP\SSDP.cs" />
-    <Compile Include="SSDP\SSDPDeviceInformation.cs" />
+    <Compile Include="Protocols\CASTV2\CastHelper.cs" />
+    <Compile Include="Protocols\CASTV2\ChromecastChannel.cs" />
+    <Compile Include="Protocols\CASTV2\ChromecastClient.cs" />
+    <Compile Include="Protocols\CASTV2\ChromecastSSLClientDataReceivedArgs.cs" />
+    <Compile Include="Protocols\CASTV2\MessageFactory.cs" />
+    <Compile Include="Protocols\CASTV2\Messages\CastMessage.cs" />
+    <Compile Include="Protocols\MDNS\DnsMessageReader.cs" />
+    <Compile Include="Protocols\MDNS\DnsMessageWriter.cs" />
+    <Compile Include="Protocols\MDNS\HostAddresses.cs" />
+    <Compile Include="Protocols\MDNS\HostInfo.cs" />
+    <Compile Include="Protocols\MDNS\InterfaceDetectEventArgs.cs" />
+    <Compile Include="Protocols\MDNS\Label.cs" />
+    <Compile Include="Protocols\MDNS\NetworkInterface.cs" />
+    <Compile Include="Protocols\MDNS\NetworkInterfaceHandler.cs" />
+    <Compile Include="Protocols\MDNS\QueryParameters.cs" />
+    <Compile Include="Protocols\MDNS\ReadOnlyCollectionWrapper.cs" />
+    <Compile Include="Protocols\MDNS\RecordClass.cs" />
+    <Compile Include="Protocols\MDNS\RecordSection.cs" />
+    <Compile Include="Protocols\MDNS\RecordType.cs" />
+    <Compile Include="Protocols\MDNS\ServiceAnnouncement.cs" />
+    <Compile Include="Protocols\MDNS\ServiceAnnouncementEventArgs.cs" />
+    <Compile Include="Protocols\MDNS\ServiceBrowser.cs" />
+    <Compile Include="Protocols\MDNS\ServiceHandler.cs" />
+    <Compile Include="Protocols\MDNS\ServiceInfo.cs" />
+    <Compile Include="Protocols\SSDP\SSDP.cs" />
+    <Compile Include="Protocols\SSDP\SSDPDeviceInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

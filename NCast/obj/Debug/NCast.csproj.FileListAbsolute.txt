@@ -1,0 +1,14 @@
+c:\users\jeremy\documents\visual studio 2013\Projects\NCast\NCast\bin\Debug\NCast.dll
+c:\users\jeremy\documents\visual studio 2013\Projects\NCast\NCast\bin\Debug\NCast.pdb
+c:\users\jeremy\documents\visual studio 2013\Projects\NCast\NCast\obj\Debug\NCast.dll
+c:\users\jeremy\documents\visual studio 2013\Projects\NCast\NCast\obj\Debug\NCast.pdb
+c:\Users\Jeremy\Documents\Visual Studio 2013\Projects\NCast\NCast\bin\Debug\NCast.dll.config
+c:\Users\Jeremy\Documents\Visual Studio 2013\Projects\NCast\NCast\bin\Debug\System.Net.Http.Primitives.dll
+c:\Users\Jeremy\Documents\Visual Studio 2013\Projects\NCast\NCast\bin\Debug\System.Net.Http.Primitives.xml
+c:\Users\Jeremy\Documents\Visual Studio 2013\Projects\NCast\NCast\obj\Debug\NCast.csproj.App.config
+c:\Users\Jeremy\Documents\Visual Studio 2013\Projects\NCast\NCast\bin\Debug\System.Net.Http.Formatting.dll
+c:\Users\Jeremy\Documents\Visual Studio 2013\Projects\NCast\NCast\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Jeremy\Documents\Visual Studio 2013\Projects\NCast\NCast\obj\Debug\NCast.csprojResolveAssemblyReference.cache
+C:\Users\Jeremy\documents\visual studio 2013\Projects\NCast\NCast\bin\Debug\protobuf-net.dll
+C:\Users\Jeremy\documents\visual studio 2013\Projects\NCast\NCast\bin\Debug\protobuf-net.pdb
+C:\Users\Jeremy\documents\visual studio 2013\Projects\NCast\NCast\bin\Debug\protobuf-net.xml
