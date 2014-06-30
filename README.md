@@ -26,12 +26,12 @@ private void OnDeviceDiscovered(object sender, SSDPDiscoveredDeviceEventArgs arg
 }
 ```
 
-// Creating a client
+Creating a client
 ```c#
 ChromecastClient = new ChromecastClient(item.Address, 8009);
 ```
 
-// Launching an application
+Launching an application
 ```c#
 var connection = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.tp.connection");
 var heartbeat = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.tp.heartbeat");
