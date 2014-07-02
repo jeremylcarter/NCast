@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Threading.Tasks;
 using NCast.Devices.Chromecast.Entities.Response;
 using NCast.Discovery;
@@ -17,6 +14,16 @@ namespace NCast.Devices
         {
             Parse(response);
         }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Parses the v1 response from a chromecast device
+        /// </summary>
+        ///
+        /// <param name="response">
+        ///     The response.
+        /// </param>
+        ///-------------------------------------------------------------------------------------------------
         public void Parse(SSDPResponse response)
         {
             if (response != null)
@@ -36,6 +43,7 @@ namespace NCast.Devices
             }
         }
 
+
         public IPEndPoint EndPoint { get; set; }
         public IPAddress Interface { get; set; }
         public string Name { get; set; }
@@ -51,7 +59,7 @@ namespace NCast.Devices
                 var detail = new DeviceInfo();
 
                 var httpClient = new HttpClient();
-                var uri = new Uri(String.Format("{0}/setup/eureka_info", this.BaseUrl));
+                var uri = new Uri(String.Format("{0}{1}", this.BaseUrl, ChromecastConstants.ChromecastEurekaPath));
 
                 var response = await httpClient.GetAsync(uri);
                 if (response.StatusCode == HttpStatusCode.OK)
@@ -66,7 +74,7 @@ namespace NCast.Devices
             {
                 return null;
             }
-           
+
         }
     }
 }

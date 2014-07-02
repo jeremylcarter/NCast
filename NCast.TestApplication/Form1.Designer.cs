@@ -33,12 +33,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tmrRefreshDeviceList = new System.Windows.Forms.Timer(this.components);
             this.groupChromecast = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lstLog = new System.Windows.Forms.ListBox();
-            this.btnLaunchYoutube = new System.Windows.Forms.Button();
-            this.lblName = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.btnLaunchYoutube = new System.Windows.Forms.Button();
+            this.lstLog = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupChromecast.SuspendLayout();
             this.SuspendLayout();
@@ -83,31 +84,21 @@
             this.groupChromecast.TabStop = false;
             this.groupChromecast.Text = "Chromecast";
             // 
-            // label1
+            // lblAddress
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Name:";
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Location = new System.Drawing.Point(72, 41);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(0, 13);
+            this.lblAddress.TabIndex = 5;
             // 
-            // label2
+            // lblName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Address:";
-            // 
-            // lstLog
-            // 
-            this.lstLog.FormattingEnabled = true;
-            this.lstLog.Location = new System.Drawing.Point(16, 70);
-            this.lstLog.Name = "lstLog";
-            this.lstLog.Size = new System.Drawing.Size(529, 173);
-            this.lstLog.TabIndex = 2;
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(72, 20);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(0, 13);
+            this.lblName.TabIndex = 4;
             // 
             // btnLaunchYoutube
             // 
@@ -120,27 +111,48 @@
             this.btnLaunchYoutube.UseVisualStyleBackColor = true;
             this.btnLaunchYoutube.Click += new System.EventHandler(this.btnLaunchYoutube_Click);
             // 
-            // lblName
+            // lstLog
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(72, 20);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(0, 13);
-            this.lblName.TabIndex = 4;
+            this.lstLog.FormattingEnabled = true;
+            this.lstLog.Location = new System.Drawing.Point(16, 70);
+            this.lstLog.Name = "lstLog";
+            this.lstLog.Size = new System.Drawing.Size(529, 173);
+            this.lstLog.TabIndex = 2;
             // 
-            // lblAddress
+            // label2
             // 
-            this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(72, 41);
-            this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(0, 13);
-            this.lblAddress.TabIndex = 5;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Address:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Name:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(101, 299);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 280);
+            this.ClientSize = new System.Drawing.Size(879, 398);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupChromecast);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -165,6 +177,7 @@
         private System.Windows.Forms.Button btnLaunchYoutube;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -10,26 +10,37 @@ using System.Windows.Forms;
 using NCast.Discovery;
 using NCast.Devices;
 using NCast.Protocols.CASTV2;
+using NCast.MDNS;
+using System.Diagnostics;
 
 namespace NCast.TestApplication
 {
     public partial class Form1 : Form
     {
-        public SSDPDiscovery Discovery = new SSDPDiscovery();
         public ChromecastClient ChromecastClient;
+        ChromecastDeviceDiscovery Discovery = new ChromecastDeviceDiscovery();
         public Form1()
         {
             InitializeComponent();
             RefreshDeviceList();
-            Discovery.OnDeviceDiscovered += OnDeviceDiscovered;
+
+            Discovery.DeviceDiscovered += Discovery_DeviceDiscovered;
+            Discovery.Start();
+
+            
+        }
+
+        private void Discovery_DeviceDiscovered(object sender, DeviceDiscoveryEventArgs e)
+        {
+            lstDeviceList.InvokeIfRequired(() =>
+            {
+                lstDeviceList.Items.Add(e.Report);
+            });
+
         }
 
         private void OnDeviceDiscovered(object sender, SSDPDiscoveredDeviceEventArgs args)
         {
-            lstDeviceList.InvokeIfRequired(() =>
-            {
-                lstDeviceList.Items.Add(args.Response);
-            });
         }
 
         public void RefreshDeviceList()
@@ -39,7 +50,7 @@ namespace NCast.TestApplication
                 if (Discovery != null)
                 {
                     lstDeviceList.InvokeIfRequired(() => lstDeviceList.Items.Clear());
-                    Discovery.Start();
+                    //Discovery.Start();
                 }
             });
         }
@@ -56,7 +67,7 @@ namespace NCast.TestApplication
 
         private async void lstDeviceList_DoubleClick(object sender, EventArgs e)
         {
-             var item = (SSDPResponse) lstDeviceList.SelectedItem;
+            var item = (SSDPResponse)lstDeviceList.SelectedItem;
             if (item != null && item.DeviceType == DeviceType.Chromecast)
             {
                 var chromeCast = new ChromecastDevice(item);
@@ -77,9 +88,9 @@ namespace NCast.TestApplication
             {
                 // Create channels for communication
 
-                var connection = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.tp.connection");
-                var heartbeat = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.tp.heartbeat");
-                var receiver = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.receiver");
+                var connection = ChromecastClient.CreateChannel(DialConstants.DialConnectionUrn);
+                var heartbeat = ChromecastClient.CreateChannel(DialConstants.DialHeartbeatUrn);
+                var receiver = ChromecastClient.CreateChannel(DialConstants.DialReceiverUrn);
 
                 await ChromecastClient.Connect();
                 ChromecastClient.Listen();
@@ -96,7 +107,7 @@ namespace NCast.TestApplication
 
                 // Start a 5 second heartbeat
                 ChromecastClient.StartHeartbeat();
-		
+
             }
         }
 
@@ -108,5 +119,16 @@ namespace NCast.TestApplication
             });
         }
 
+        ChromecastDeviceDiscovery disc = new ChromecastDeviceDiscovery();
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            disc.DeviceDiscovered += Disc_DeviceDiscovered;
+            disc.Start();
+        }
+
+        private void Disc_DeviceDiscovered(object sender, DeviceDiscoveryEventArgs e)
+        {
+            Debug.WriteLine(string.Format("Report: {0}", e.Report));
+        }
     }
 }
