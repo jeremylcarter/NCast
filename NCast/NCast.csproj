@@ -63,8 +63,15 @@
     <Compile Include="Devices\Chromecast\Entities\Response\SupportedTimezone.cs" />
     <Compile Include="Devices\Chromecast\Entities\SetupState.cs" />
     <Compile Include="Devices\Chromecast\Entities\WpaState.cs" />
+    <Compile Include="Devices\Constants.cs" />
     <Compile Include="Devices\DeviceTypeDeterminer.cs" />
     <Compile Include="Devices\DeviceType.cs" />
+    <Compile Include="Discovery\ChromecastDeviceDiscovery.cs" />
+    <Compile Include="Discovery\ChromecastV1DeviceDiscoveryReportItem.cs" />
+    <Compile Include="Discovery\ChromecastV2DeviceDiscoveryReportItem.cs" />
+    <Compile Include="Discovery\DeviceDiscovery.cs" />
+    <Compile Include="Discovery\ChromecastDeviceDiscoveryReportItem.cs" />
+    <Compile Include="Discovery\DeviceDiscoveryEventArgs.cs" />
     <Compile Include="Discovery\SSDPDiscovery.cs" />
     <Compile Include="Discovery\SSDPResponse.cs" />
     <Compile Include="Devices\IDevice.cs" />
@@ -98,6 +105,7 @@
     <Compile Include="Protocols\SSDP\SSDPDeviceInformation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Discovery\IDeviceDiscoveryReportItem.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

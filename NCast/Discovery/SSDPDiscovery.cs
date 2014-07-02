@@ -11,14 +11,14 @@ using NCast.Devices;
 
 namespace NCast.Discovery
 {
-    public class SSDPDiscovery
+    internal class SSDPDiscovery
     {
         private SSDP _SSDP = new SSDP();
         public SSDPDiscovery()
         {
             HashCache = new List<string>();
         }
-        public EventHandler<SSDPDiscoveredDeviceEventArgs> OnDeviceDiscovered { get; set; }
+        public event EventHandler<SSDPDiscoveredDeviceEventArgs> DeviceDiscovered;
         List<string> HashCache { get; set; }
         public async void Start()
         {
@@ -53,10 +53,7 @@ namespace NCast.Discovery
 
                                     element.DeviceType = DeviceTypeDeterminer.Determine(element);
 
-                                    if (OnDeviceDiscovered != null)
-                                    {
-                                        OnDeviceDiscovered(this, new SSDPDiscoveredDeviceEventArgs(element));
-                                    }
+                                    OnDeviceDiscovered(new SSDPDiscoveredDeviceEventArgs(element));
                                 }
                             }
 
@@ -72,14 +69,14 @@ namespace NCast.Discovery
 
         }
 
-        public async Task<List<SSDPResponse>> Find(IPAddress address)
+        private async Task<List<SSDPResponse>> Find(IPAddress address)
         {
             var list = new List<SSDPResponse>();
 
             try
             {
                 IPEndPoint localEndPoint = new IPEndPoint(address, 1901);
-                IPEndPoint multicastEndPoint = new IPEndPoint(IPAddress.Parse("239.255.255.250"), 1900);
+                IPEndPoint multicastEndPoint = new IPEndPoint(IPAddress.Parse(DialConstants.GenericMulticastAddress), 1900);
 
                 Socket udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 udpSocket.ReceiveTimeout = 1000;
@@ -90,10 +87,10 @@ namespace NCast.Discovery
 
                 udpSocket.Bind(localEndPoint);
 
-                var ssdpAddress = "239.255.255.250";
+                var ssdpAddress = DialConstants.GenericMulticastAddress;
                 var ssdpPort = 1900;
                 var ssdpMx = 2;
-                var ssdpSt = "urn:dial-multiscreen-org:service:dial:1";
+                var ssdpSt = DialConstants.DialMultiScreenUrn;
 
                 var ssdpRequest = "M-SEARCH * HTTP/1.1\r\n" +
                             String.Format("HOST: {0}:{1}\r\n", ssdpAddress, ssdpPort) +
@@ -137,11 +134,8 @@ namespace NCast.Discovery
                             {
                                 break;
                             }
-
                         }
-
                     }
-
                 }
 
                 if (udpSocket != null)
@@ -152,6 +146,12 @@ namespace NCast.Discovery
             }
 
             return list;
+        }
+
+        protected void OnDeviceDiscovered(SSDPDiscoveredDeviceEventArgs e)
+        {
+            if (DeviceDiscovered != null)
+                DeviceDiscovered(this, e);
         }
     }
 
