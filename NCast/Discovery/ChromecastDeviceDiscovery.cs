@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using NCast.Devices;
 using NCast.MDNS;
 
 namespace NCast.Discovery
@@ -21,9 +23,25 @@ namespace NCast.Discovery
     ///-------------------------------------------------------------------------------------------------
     public class ChromecastDeviceDiscovery : DeviceDiscovery
     {
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Gets or sets a value indicating whether to cancel the SSDP discovery on mDNS.
+        /// </summary>
+        /// <remarks>
+        ///     If false then <c>DiscoveryConstants.SsdpInvocationDelay</c> is in effect.
+        ///     If true then SSDP discovery is canceled as soon as the first mDNS packet arrives.
+        /// </remarks>
+        ///-------------------------------------------------------------------------------------------------
+        public bool CancelSsdpDiscoveryOnMDns { get; set; }
         private SSDPDiscovery ssdpDiscovery = new SSDPDiscovery();
         private ServiceBrowser mDnsDiscovery = new ServiceBrowser();
+        private CancellationTokenSource ssdpCancellation = new CancellationTokenSource();
+        private Timer ssdpShootOffTimer;
 
+        public ChromecastDeviceDiscovery()
+        {
+            CancelSsdpDiscoveryOnMDns = true;
+        }
         ///-------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Starts discovery of Chromecast dongles in local subnet. Subscribe to <c>DeviceDiscovered</c> to
@@ -32,12 +50,26 @@ namespace NCast.Discovery
         ///-------------------------------------------------------------------------------------------------
         public override async void Start()
         {
-            // TODO: This stuff still needs to go shoot off into thread space and we need CancellationTokens
             mDnsDiscovery.ServiceAdded += MDnsDiscovery_ServiceAdded;
             mDnsDiscovery.StartBrowse();
 
-            ssdpDiscovery.DeviceDiscovered += SsdpDiscovery_DeviceDiscovered;
-            ssdpDiscovery.Start();
+            // Start a timer to delay the SSDP discovery.
+            ssdpShootOffTimer = new Timer((e) =>
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    if (ssdpCancellation.Token.IsCancellationRequested)
+                    {
+                        Trace.WriteLine("Cancelled.");
+                        ssdpCancellation.Token.ThrowIfCancellationRequested();
+                    }
+
+                    Trace.WriteLine("Starting SSDP discovery...");
+                    ssdpDiscovery.DeviceDiscovered += SsdpDiscovery_DeviceDiscovered;
+                    ssdpDiscovery.Start();
+
+                }, ssdpCancellation.Token);
+            }, this, DiscoveryConstants.SsdpInvocationDelay, Timeout.InfiniteTimeSpan);
         }
 
         private void SsdpDiscovery_DeviceDiscovered(object sender, SSDPDiscoveredDeviceEventArgs e)
@@ -65,6 +97,10 @@ namespace NCast.Discovery
 
         private void MDnsDiscovery_ServiceAdded(object sender, ServiceAnnouncementEventArgs e)
         {
+            if (CancelSsdpDiscoveryOnMDns)
+            {
+                ssdpCancellation.Cancel();
+            }
 
             IPAddress localInterface = IPAddress.Any;
 

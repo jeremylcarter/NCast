@@ -25,9 +25,6 @@ namespace NCast.TestApplication
             RefreshDeviceList();
 
             Discovery.DeviceDiscovered += Discovery_DeviceDiscovered;
-            Discovery.Start();
-
-            
         }
 
         private void Discovery_DeviceDiscovered(object sender, DeviceDiscoveryEventArgs e)
@@ -38,7 +35,7 @@ namespace NCast.TestApplication
             });
 
         }
-
+         
         private void OnDeviceDiscovered(object sender, SSDPDiscoveredDeviceEventArgs args)
         {
         }
@@ -50,7 +47,7 @@ namespace NCast.TestApplication
                 if (Discovery != null)
                 {
                     lstDeviceList.InvokeIfRequired(() => lstDeviceList.Items.Clear());
-                    //Discovery.Start();
+                    Discovery.Start();
                 }
             });
         }
@@ -77,7 +74,7 @@ namespace NCast.TestApplication
                 lblName.Text = chromeCastReport.Name;
 
                 groupChromecast.Enabled = true;
-                ChromecastClient = new ChromecastClient(chromeCastReport.EndPoint.Address, 8009);
+                ChromecastClient = new ChromecastClient(chromeCastReport.EndPoint.Address, 8009);   // <-- dat port number :(
                 btnLaunchYoutube.Enabled = true;
             }
         }
