@@ -41,6 +41,7 @@
             this.lstLog = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupChromecast.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +72,9 @@
             // 
             // groupChromecast
             // 
+            this.groupChromecast.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupChromecast.Controls.Add(this.label3);
             this.groupChromecast.Controls.Add(this.AppComboBox);
             this.groupChromecast.Controls.Add(this.lblAddress);
@@ -82,7 +86,7 @@
             this.groupChromecast.Enabled = false;
             this.groupChromecast.Location = new System.Drawing.Point(311, 12);
             this.groupChromecast.Name = "groupChromecast";
-            this.groupChromecast.Size = new System.Drawing.Size(556, 256);
+            this.groupChromecast.Size = new System.Drawing.Size(1174, 451);
             this.groupChromecast.TabIndex = 2;
             this.groupChromecast.TabStop = false;
             this.groupChromecast.Text = "Chromecast";
@@ -135,10 +139,13 @@
             // 
             // lstLog
             // 
+            this.lstLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstLog.FormattingEnabled = true;
             this.lstLog.Location = new System.Drawing.Point(16, 83);
             this.lstLog.Name = "lstLog";
-            this.lstLog.Size = new System.Drawing.Size(529, 160);
+            this.lstLog.Size = new System.Drawing.Size(1147, 355);
             this.lstLog.TabIndex = 2;
             // 
             // label2
@@ -159,11 +166,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 304);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "YepYep";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 398);
+            this.ClientSize = new System.Drawing.Size(1497, 593);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupChromecast);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -190,6 +208,7 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox AppComboBox;
+        private System.Windows.Forms.Button button1;
     }
 }
 

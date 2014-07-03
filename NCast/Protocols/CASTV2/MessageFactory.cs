@@ -57,6 +57,7 @@ namespace NCast.Protocols.CASTV2
             msg.payload_utf8 = String.Format("{{\"type\":\"LAUNCH\",\"appId\":\"{0}\",\"requestId\":1}}", appId);
             return msg;
         }
+
     }
 
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using NCast.Devices.Chromecast.Entities.Response;
 using NCast.Discovery;
@@ -64,7 +63,7 @@ namespace NCast.Devices
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var stream = await response.Content.ReadAsStreamAsync();
-                    detail = (DeviceInfo)new DataContractJsonSerializer(typeof(DeviceInfo)).ReadObject(stream);
+                    detail = stream.DeSerializeJson<DeviceInfo>();
                 }
 
                 return detail;

@@ -24,6 +24,7 @@ namespace NCast.Devices
         public const string DialConnectionUrn = "urn:x-cast:com.google.cast.tp.connection";
         public const string DialHeartbeatUrn = "urn:x-cast:com.google.cast.tp.heartbeat";
         public const string DialReceiverUrn = "urn:x-cast:com.google.cast.receiver";
+        public const string DialMediaUrn = "urn:x-cast:com.google.cast.media";
     }
 
     public static class ChromecastConstants

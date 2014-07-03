@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using ProtoBuf;
 
 namespace NCast.Protocols.CASTV2
@@ -25,5 +22,12 @@ namespace NCast.Protocols.CASTV2
         public string payload_utf8;
         [ProtoMember(7, IsRequired = false)]
         public byte[] payload_binary;
+
+        public string GetJsonType()
+        {
+            dynamic stuff = JsonConvert.DeserializeObject(payload_utf8);
+
+            return stuff.type;
+        }
     }
 }

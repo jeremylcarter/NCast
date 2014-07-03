@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NCast.Discovery;
 using NCast.Devices;
-using NCast.Protocols.CASTV2;
-using NCast.MDNS;
-using System.Diagnostics;
-using System.IO;
 using NCast.Devices.Chromecast.Entities.Response;
+using NCast.Discovery;
+using NCast.Protocols.CASTV2;
+
 namespace NCast.TestApplication
 {
     public partial class Form1 : Form
@@ -71,34 +64,20 @@ namespace NCast.TestApplication
 
         private async void lstDeviceList_DoubleClick(object sender, EventArgs e)
         {
-            var da = (DeviceAggregate)lstDeviceList.SelectedItem;
-            if (da != null && da.Report.DeviceType == DeviceType.Chromecast)
+            CurrentAggregate = (DeviceAggregate)lstDeviceList.SelectedItem;
+            if (CurrentAggregate != null && CurrentAggregate.Report.DeviceType == DeviceType.Chromecast)
             {
-                CurrentAggregate = da;
-                var chromeCastReport = da.Report as ChromecastDeviceDiscoveryReportItem;
-                da.Device = new ChromecastDevice(chromeCastReport);
+                var chromecastReport = CurrentAggregate.Report as ChromecastDeviceDiscoveryReportItem;
+                CurrentAggregate.StartDevice();
 
-                lblAddress.Text = chromeCastReport.EndPoint.ToString();
-                lblName.Text = chromeCastReport.Name;
+                lblAddress.Text = chromecastReport.EndPoint.ToString();
+                lblName.Text = chromecastReport.Name;
 
                 groupChromecast.Enabled = true;
-                da.Client = new ChromecastClient(chromeCastReport.EndPoint.Address, 8009);   // <-- dat port number :(
-
-                da.ConnectionChannel = da.Client.CreateChannel(DialConstants.DialConnectionUrn);
-                da.HeartbeatChannel = da.Client.CreateChannel(DialConstants.DialHeartbeatUrn);
-                da.ReceiverChannel = da.Client.CreateChannel(DialConstants.DialReceiverUrn);
-
-                await da.Client.Connect();
-                da.Client.Listen();
-
-                da.ConnectionChannel.MessageReceived += OnData;
-                da.ReceiverChannel.MessageReceived += OnData;
-                da.HeartbeatChannel.MessageReceived += OnData;
-
-                // Send the connect message
-                da.Client.Write(MessageFactory.Connect());
-
-                da.Client.StartHeartbeat();
+                CurrentAggregate.ConnectionChannel.MessageReceived += OnData;
+                CurrentAggregate.ReceiverChannel.MessageReceived += OnData;
+                CurrentAggregate.HeartbeatChannel.MessageReceived += OnData;
+                CurrentAggregate.MediaChannel.MessageReceived += OnData;
 
                 btnLaunchYoutube.Enabled = true;
             }
@@ -109,8 +88,7 @@ namespace NCast.TestApplication
             if (CurrentAggregate != null && CurrentAggregate.IsReady)
             {
                 // Launch any app from the combo box
-                var app = AppComboBox.SelectedItem as ChromecastApp;
-                CurrentAggregate.Client.Write(MessageFactory.Launch(app.app_id));
+                CurrentAggregate.Client.Write(MessageFactory.Launch((AppComboBox.SelectedItem as ChromecastApp).app_id));
 
             }
         }
@@ -121,9 +99,16 @@ namespace NCast.TestApplication
         {
             lstDeviceList.InvokeIfRequired(() =>
             {
+                // Added just to see how it works out to get the "type" out JSON dynamically. Will be removed.
+                Trace.WriteLine(string.Format("Responsetype: {0}",e.Message.GetJsonType()));
                 lstLog.Items.Add(e.Message.payload_utf8);
+                
             });
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

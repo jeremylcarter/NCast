@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="protobuf-net">
       <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
@@ -54,18 +58,21 @@
     <Compile Include="Common\WebHelper.cs" />
     <Compile Include="Devices\Chromecast\ChromecastDevice.cs" />
     <Compile Include="Devices\Chromecast\ChromecastAppList.cs" />
+    <Compile Include="Devices\Chromecast\Entities\Request\Request.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\ApiVersion.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\AppList.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\ConfiguredNetworks.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\DeviceDetail.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\Location.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\OptIn.cs" />
+    <Compile Include="Devices\Chromecast\Entities\Response\ReceiverStatusResponse.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\Sign.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\SupportedLocale.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\SupportedTimezone.cs" />
     <Compile Include="Devices\Chromecast\Entities\SetupState.cs" />
     <Compile Include="Devices\Chromecast\Entities\WpaState.cs" />
     <Compile Include="Devices\Constants.cs" />
+    <Compile Include="Devices\DeviceAggregate.cs" />
     <Compile Include="Devices\DeviceTypeDeterminer.cs" />
     <Compile Include="Devices\DeviceType.cs" />
     <Compile Include="Discovery\ChromecastDeviceDiscovery.cs" />
@@ -77,6 +84,7 @@
     <Compile Include="Discovery\SSDPDiscovery.cs" />
     <Compile Include="Discovery\SSDPResponse.cs" />
     <Compile Include="Devices\IDevice.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Protocols\CASTV2\CastHelper.cs" />
@@ -108,8 +116,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Discovery\IDeviceDiscoveryReportItem.cs" />
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

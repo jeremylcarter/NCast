@@ -21,7 +21,6 @@ namespace NCast
                 }
                 return sb.ToString();
             }
-
         }
 
     }
