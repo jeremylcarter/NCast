@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using NCast.Devices;
 
 namespace NCast.Protocols.CASTV2
 {
@@ -47,13 +48,13 @@ namespace NCast.Protocols.CASTV2
         {
 
             ChromecastChannel channel;
-            if (!Channels.Any(ie => ie.Namespace == "urn:x-cast:com.google.cast.tp.heartbeat"))
+            if (!Channels.Any(ie => ie.Namespace == DialConstants.DialHeartbeatUrn))
             {
-                channel = CreateChannel("urn:x-cast:com.google.cast.tp.heartbeat");
+                channel = CreateChannel(DialConstants.DialHeartbeatUrn);
             }
             else
             {
-                channel = Channels.FirstOrDefault(i => i.Namespace == "urn:x-cast:com.google.cast.tp.heartbeat");
+                channel = Channels.FirstOrDefault(i => i.Namespace == DialConstants.DialHeartbeatUrn);
             }
             if (channel != null && _hearbeatRunning == false)
             {
@@ -82,7 +83,7 @@ namespace NCast.Protocols.CASTV2
             _client.ReceiveBufferSize = 2048;
             _client.SendBufferSize = 2048;
             await _client.ConnectAsync(IPAddress, Port);
-            _stream = new SslStream(_client.GetStream(), true, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
+            _stream = new SslStream(_client.GetStream(), true, ValidateServerCertificate, null);
             _stream.AuthenticateAsClient(name);
             _running = true;
             return true;
