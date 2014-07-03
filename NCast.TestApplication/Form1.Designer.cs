@@ -33,6 +33,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tmrRefreshDeviceList = new System.Windows.Forms.Timer(this.components);
             this.groupChromecast = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.AppComboBox = new System.Windows.Forms.ComboBox();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.btnLaunchYoutube = new System.Windows.Forms.Button();
@@ -69,6 +71,8 @@
             // 
             // groupChromecast
             // 
+            this.groupChromecast.Controls.Add(this.label3);
+            this.groupChromecast.Controls.Add(this.AppComboBox);
             this.groupChromecast.Controls.Add(this.lblAddress);
             this.groupChromecast.Controls.Add(this.lblName);
             this.groupChromecast.Controls.Add(this.btnLaunchYoutube);
@@ -82,6 +86,24 @@
             this.groupChromecast.TabIndex = 2;
             this.groupChromecast.TabStop = false;
             this.groupChromecast.Text = "Chromecast";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 61);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Supported Apps";
+            // 
+            // AppComboBox
+            // 
+            this.AppComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AppComboBox.FormattingEnabled = true;
+            this.AppComboBox.Location = new System.Drawing.Point(110, 58);
+            this.AppComboBox.Name = "AppComboBox";
+            this.AppComboBox.Size = new System.Drawing.Size(223, 21);
+            this.AppComboBox.TabIndex = 6;
             // 
             // lblAddress
             // 
@@ -113,9 +135,9 @@
             // lstLog
             // 
             this.lstLog.FormattingEnabled = true;
-            this.lstLog.Location = new System.Drawing.Point(16, 70);
+            this.lstLog.Location = new System.Drawing.Point(16, 83);
             this.lstLog.Name = "lstLog";
-            this.lstLog.Size = new System.Drawing.Size(529, 173);
+            this.lstLog.Size = new System.Drawing.Size(529, 160);
             this.lstLog.TabIndex = 2;
             // 
             // label2
@@ -165,6 +187,8 @@
         private System.Windows.Forms.Button btnLaunchYoutube;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox AppComboBox;
     }
 }
 

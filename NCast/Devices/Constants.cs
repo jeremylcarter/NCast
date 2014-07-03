@@ -14,6 +14,8 @@ namespace NCast.Devices
         /// </summary>
         ///-------------------------------------------------------------------------------------------------
         public static TimeSpan SsdpInvocationDelay = TimeSpan.FromSeconds(5);
+        public const string OldAppList = "https://clients3.google.com/cast/chromecast/device/config";
+        public const string NewAppList = "https://clients3.google.com/cast/chromecast/device/baseconfig";
     }
     public static class DialConstants
     {

@@ -51,9 +51,11 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\WebHelper.cs" />
     <Compile Include="Devices\Chromecast\ChromecastDevice.cs" />
-    <Compile Include="Devices\Chromecast\ChromecastDetail.cs" />
+    <Compile Include="Devices\Chromecast\ChromecastAppList.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\ApiVersion.cs" />
+    <Compile Include="Devices\Chromecast\Entities\Response\AppList.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\ConfiguredNetworks.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\DeviceDetail.cs" />
     <Compile Include="Devices\Chromecast\Entities\Response\Location.cs" />

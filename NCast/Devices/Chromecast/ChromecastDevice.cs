@@ -49,6 +49,8 @@ namespace NCast.Devices
         public string BaseUrl { get; set; }
         public DeviceType Type { get; set; }
 
+
+        
         public async Task<DeviceInfo> GetDetail()
         {
             try

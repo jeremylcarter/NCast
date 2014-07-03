@@ -12,7 +12,8 @@ using NCast.Devices;
 using NCast.Protocols.CASTV2;
 using NCast.MDNS;
 using System.Diagnostics;
-
+using System.IO;
+using NCast.Devices.Chromecast.Entities.Response;
 namespace NCast.TestApplication
 {
     public partial class Form1 : Form
@@ -25,6 +26,16 @@ namespace NCast.TestApplication
             RefreshDeviceList();
 
             Discovery.DeviceDiscovered += Discovery_DeviceDiscovered;
+
+            ChromecastAppList.Get().ContinueWith((t) =>
+                AppComboBox.InvokeIfRequired(() =>
+                {
+                    AppComboBox.Items.AddRange(t.Result.applications);
+                    if (AppComboBox.Items.Count > 0)
+                    {
+                        AppComboBox.SelectedIndex = 0;
+                    }
+                }));
         }
 
         private void Discovery_DeviceDiscovered(object sender, DeviceDiscoveryEventArgs e)
@@ -35,7 +46,7 @@ namespace NCast.TestApplication
             });
 
         }
-         
+
         private void OnDeviceDiscovered(object sender, SSDPDiscoveredDeviceEventArgs args)
         {
         }
@@ -116,6 +127,5 @@ namespace NCast.TestApplication
             });
         }
 
-      
     }
 }
