@@ -6,7 +6,7 @@ NCast C# SSDP discovery and content casting. Currently supports renderers such a
 ```c#
 public SSDPDiscovery Discovery = new SSDPDiscovery();
 // Setup the event when a device is discovered
-Discovery.OnDeviceDiscovered += OnDeviceDiscovered;
+Discovery.DeviceDiscovered += OnDeviceDiscovered;
 // Start discovering
 Discovery.Start();
 ```
