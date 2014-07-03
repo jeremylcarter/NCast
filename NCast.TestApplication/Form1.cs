@@ -67,17 +67,17 @@ namespace NCast.TestApplication
 
         private async void lstDeviceList_DoubleClick(object sender, EventArgs e)
         {
-            var item = (SSDPResponse)lstDeviceList.SelectedItem;
+            var item = (DeviceDiscoveryReportItem)lstDeviceList.SelectedItem;
             if (item != null && item.DeviceType == DeviceType.Chromecast)
             {
-                var chromeCast = new ChromecastDevice(item);
-                var info = await chromeCast.GetDetail();
+                var chromeCastReport = item as ChromecastDeviceDiscoveryReportItem;
+                var chromeCast = new ChromecastDevice(chromeCastReport);
 
-                lblAddress.Text = info.IpAddress;
-                lblName.Text = info.Name;
+                lblAddress.Text = chromeCastReport.EndPoint.ToString();
+                lblName.Text = chromeCastReport.Name;
 
                 groupChromecast.Enabled = true;
-                ChromecastClient = new ChromecastClient(item.Address, 8009);
+                ChromecastClient = new ChromecastClient(chromeCastReport.EndPoint.Address, 8009);
                 btnLaunchYoutube.Enabled = true;
             }
         }
@@ -119,16 +119,6 @@ namespace NCast.TestApplication
             });
         }
 
-        ChromecastDeviceDiscovery disc = new ChromecastDeviceDiscovery();
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            disc.DeviceDiscovered += Disc_DeviceDiscovered;
-            disc.Start();
-        }
-
-        private void Disc_DeviceDiscovered(object sender, DeviceDiscoveryEventArgs e)
-        {
-            Debug.WriteLine(string.Format("Report: {0}", e.Report));
-        }
+      
     }
 }

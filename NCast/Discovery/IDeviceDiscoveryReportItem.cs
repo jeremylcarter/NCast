@@ -7,8 +7,9 @@ namespace NCast.Discovery
     ///     Interface for device discovery report.
     /// </summary>
     ///-------------------------------------------------------------------------------------------------
-    public interface IDeviceDiscoveryReportItem
+    public abstract class DeviceDiscoveryReportItem
     {
+        public DeviceType DeviceType { get; set; }
         ///-------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Creates a <c>Device</c> instance from a <c>DeviceDiscoveryReport</c>
@@ -18,6 +19,6 @@ namespace NCast.Discovery
         ///     This Report as an <c>IDevice</c>.
         /// </returns>
         ///-------------------------------------------------------------------------------------------------
-        IDevice ToDevice();
+        public abstract IDevice ToDevice();
     }
 }

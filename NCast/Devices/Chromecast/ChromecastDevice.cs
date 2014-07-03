@@ -10,9 +10,24 @@ namespace NCast.Devices
 {
     public class ChromecastDevice : IDevice
     {
-        public ChromecastDevice(SSDPResponse response)
+        public ChromecastDevice(ChromecastDeviceDiscoveryReportItem report)
         {
-            Parse(response);
+            Parse(report);
+        }
+
+        public bool Parse(DeviceDiscoveryReportItem report)
+        {
+            if (report is ChromecastDeviceDiscoveryReportItem == false)
+                return false;
+            var chromeCastReport = report as ChromecastDeviceDiscoveryReportItem;
+            this.EndPoint = chromeCastReport.EndPoint;
+            this.Interface = chromeCastReport.Interface;
+            this.Name = chromeCastReport.Name;
+            this.BaseUrl = chromeCastReport.BaseUri.ToString();
+            this.Type = chromeCastReport.DeviceType;
+            this.Manufacturer = chromeCastReport.Manufacturer;
+            this.Model = chromeCastReport.Model;
+            return true;
         }
 
         ///-------------------------------------------------------------------------------------------------
@@ -24,24 +39,6 @@ namespace NCast.Devices
         ///     The response.
         /// </param>
         ///-------------------------------------------------------------------------------------------------
-        public void Parse(SSDPResponse response)
-        {
-            if (response != null)
-            {
-                this.EndPoint = response.EndPoint;
-                this.Interface = response.Interface;
-                this.Name = response.Name;
-
-                var uri = new Uri(response.Url);
-                this.BaseUrl = String.Format("{0}://{1}", uri.Scheme, uri.Authority);
-                this.Type = response.DeviceType;
-                if (response.Information != null)
-                {
-                    this.Manufacturer = response.Information.Manufacturer;
-                    this.Model = response.Information.Model;
-                }
-            }
-        }
 
 
         public IPEndPoint EndPoint { get; set; }

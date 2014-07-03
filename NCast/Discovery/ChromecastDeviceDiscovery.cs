@@ -47,7 +47,7 @@ namespace NCast.Discovery
 
             var report = new ChromecastV1DeviceDiscoveryReportItem()
             {
-                Endpoint = response.EndPoint,
+                EndPoint = response.EndPoint,
                 Interface = response.Interface,
                 Name = response.Name,
                 Id = response.Hash,
@@ -123,7 +123,7 @@ namespace NCast.Discovery
                 Version = versionNumber,
                 Id = Id,
                 Name = e.Announcement.Hostname,
-                Endpoint = new IPEndPoint(e.Announcement.Addresses.First(), e.Announcement.Port),
+                EndPoint = new IPEndPoint(e.Announcement.Addresses.First(), e.Announcement.Port),
                 Interface = localInterface,
                 BaseUri = uri,
             };

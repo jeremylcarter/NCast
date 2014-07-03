@@ -10,7 +10,7 @@ namespace NCast
 {
     public interface IDevice
     {
-        void Parse(SSDPResponse response);
+        bool Parse(DeviceDiscoveryReportItem report);
         IPEndPoint EndPoint { get; set; }
         IPAddress Interface { get; set; }
         string Name { get; set; }

@@ -15,5 +15,6 @@ namespace NCast.Discovery
             Model = "Generic";
             Version = 2;
         }
+
     }
 }
