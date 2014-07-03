@@ -90,7 +90,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 61);
+            this.label3.Location = new System.Drawing.Point(18, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 7;
@@ -99,8 +99,9 @@
             // AppComboBox
             // 
             this.AppComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AppComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AppComboBox.FormattingEnabled = true;
-            this.AppComboBox.Location = new System.Drawing.Point(110, 58);
+            this.AppComboBox.Location = new System.Drawing.Point(107, 58);
             this.AppComboBox.Name = "AppComboBox";
             this.AppComboBox.Size = new System.Drawing.Size(223, 21);
             this.AppComboBox.TabIndex = 6;
@@ -124,11 +125,11 @@
             // btnLaunchYoutube
             // 
             this.btnLaunchYoutube.Enabled = false;
-            this.btnLaunchYoutube.Location = new System.Drawing.Point(359, 20);
+            this.btnLaunchYoutube.Location = new System.Drawing.Point(336, 41);
             this.btnLaunchYoutube.Name = "btnLaunchYoutube";
-            this.btnLaunchYoutube.Size = new System.Drawing.Size(186, 41);
+            this.btnLaunchYoutube.Size = new System.Drawing.Size(209, 41);
             this.btnLaunchYoutube.TabIndex = 3;
-            this.btnLaunchYoutube.Text = "Open Youtube";
+            this.btnLaunchYoutube.Text = "Launch App";
             this.btnLaunchYoutube.UseVisualStyleBackColor = true;
             this.btnLaunchYoutube.Click += new System.EventHandler(this.btnLaunchYoutube_Click);
             // 

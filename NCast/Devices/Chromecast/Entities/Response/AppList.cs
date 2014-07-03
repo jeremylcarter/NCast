@@ -23,7 +23,7 @@ namespace NCast.Devices.Chromecast.Entities.Response
     {
 
         [DataMember()]
-        public Applications[] applications;
+        public ChromecastApp[] applications;
 
         [DataMember()]
         public string[] enabled_app_ids;
@@ -33,7 +33,7 @@ namespace NCast.Devices.Chromecast.Entities.Response
     }
 
     [DataContract(Name = "applications")]
-    public partial class Applications
+    public partial class ChromecastApp
     {
 
         [DataMember()]
