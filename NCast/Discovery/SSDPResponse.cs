@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace NCast.Discovery
 {
-
+    ///-------------------------------------------------------------------------------------------------
+    /// <summary>
+    ///     SSDP response from SSDP discovery via <c>SSDPDiscovery></c>.
+    /// </summary>
+    ///-------------------------------------------------------------------------------------------------
     public class SSDPResponse
     {
         public SSDPResponse()
@@ -27,7 +31,6 @@ namespace NCast.Discovery
         public SSDPDeviceInformation Information { get; set; }
         public void Parse(string response)
         {
-
             if (response.StartsWith("HTTP/1.1 200 OK"))
             {
                 this.Response = response;

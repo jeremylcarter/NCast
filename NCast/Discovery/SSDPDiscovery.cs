@@ -11,6 +11,11 @@ using NCast.Devices;
 
 namespace NCast.Discovery
 {
+    ///-------------------------------------------------------------------------------------------------
+    /// <summary>
+    ///     Internal class representing the discovery process of SSDP devices on the 239.255.255.250 multicast address
+    /// </summary>
+    ///-------------------------------------------------------------------------------------------------
     internal class SSDPDiscovery
     {
         private SSDP _SSDP = new SSDP();
@@ -23,11 +28,11 @@ namespace NCast.Discovery
         public async void Start()
         {
 
-            foreach (System.Net.NetworkInformation.NetworkInterface ni in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
+            foreach (NetworkInterface networkInterface in NetworkInterface.GetAllNetworkInterfaces())
             {
-                if ((ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet) && ni.OperationalStatus == OperationalStatus.Up)
+                if ((networkInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || networkInterface.NetworkInterfaceType == NetworkInterfaceType.Ethernet) && networkInterface.OperationalStatus == OperationalStatus.Up)
                 {
-                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                    foreach (UnicastIPAddressInformation ip in networkInterface.GetIPProperties().UnicastAddresses)
                     {
                         try
                         {

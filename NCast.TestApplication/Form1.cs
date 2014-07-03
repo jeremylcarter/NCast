@@ -95,9 +95,9 @@ namespace NCast.TestApplication
                 await ChromecastClient.Connect();
                 ChromecastClient.Listen();
 
-                connection.OnMessageReceived += OnData;
-                receiver.OnMessageReceived += OnData;
-                heartbeat.OnMessageReceived += OnData;
+                connection.MessageReceived += OnData;
+                receiver.MessageReceived += OnData;
+                heartbeat.MessageReceived += OnData;
 
                 // Send the connect message
                 ChromecastClient.Write(MessageFactory.Connect());

@@ -33,16 +33,18 @@ ChromecastClient = new ChromecastClient(item.Address, 8009);
 
 Launching an application
 ```c#
-var connection = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.tp.connection");
-var heartbeat = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.tp.heartbeat");
-var receiver = ChromecastClient.CreateChannel("urn:x-cast:com.google.cast.receiver");
+// Create channels for communication
+
+var connection = ChromecastClient.CreateChannel(DialConstants.DialConnectionUrn);
+var heartbeat = ChromecastClient.CreateChannel(DialConstants.DialHeartbeatUrn);
+var receiver = ChromecastClient.CreateChannel(DialConstants.DialReceiverUrn);
 
 await ChromecastClient.Connect();
 ChromecastClient.Listen();
 
-connection.OnMessageReceived += OnData;
-receiver.OnMessageReceived += OnData;
-heartbeat.OnMessageReceived += OnData;
+connection.MessageReceived += OnData;
+receiver.MessageReceived += OnData;
+heartbeat.MessageReceived += OnData;
 
 // Send the connect message
 ChromecastClient.Write(MessageFactory.Connect());

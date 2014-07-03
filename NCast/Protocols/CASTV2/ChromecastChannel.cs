@@ -12,7 +12,7 @@ namespace NCast.Protocols.CASTV2
         private ChromecastClient _client { get; set; }
         public string Namespace { get; set; }
 
-        public EventHandler<ChromecastSSLClientDataReceivedArgs> OnMessageReceived;
+        public event EventHandler<ChromecastSSLClientDataReceivedArgs> MessageReceived;
 
         public ChromecastChannel(ChromecastClient client, string @ns)
         {
@@ -32,6 +32,11 @@ namespace NCast.Protocols.CASTV2
             await _client.Write(bytes);
         }
 
+        public void OnMessageReceived(ChromecastSSLClientDataReceivedArgs e)
+        {
+            if (MessageReceived != null)
+                MessageReceived(this, e);
+        }
     }
 
 }

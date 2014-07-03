@@ -22,7 +22,7 @@ namespace NCast.Protocols.CASTV2
         public IPAddress IPAddress { get; set; }
         public int Port { get; set; }
 
-        public EventHandler<ChromecastSSLClientDataReceivedArgs> OnMessageReceived;
+        public event EventHandler<ChromecastSSLClientDataReceivedArgs> MessageReceived;
 
         public ChromecastClient(IPEndPoint endPoint)
         {
@@ -44,6 +44,10 @@ namespace NCast.Protocols.CASTV2
             return channel;
         }
 
+        public void StopHeartbeat()
+        {
+            _hearbeatRunning = false;
+        }
         public void StartHeartbeat()
         {
 
@@ -76,7 +80,6 @@ namespace NCast.Protocols.CASTV2
 
         }
 
-
         public async Task<bool> Connect(string name = "client")
         {
             if (_client == null) _client = new TcpClient();
@@ -89,7 +92,7 @@ namespace NCast.Protocols.CASTV2
             return true;
         }
 
-        public async void ReadPacket()
+        private void ReadPacket()
         {
 
             try
@@ -157,20 +160,14 @@ namespace NCast.Protocols.CASTV2
                     if (castMessage != null)
                     {
 
-                        if (OnMessageReceived != null)
-                        {
-                            OnMessageReceived(this, new ChromecastSSLClientDataReceivedArgs(entireMessageArray, castMessage));
-                        }
+                            OnMessageReceived(new ChromecastSSLClientDataReceivedArgs(entireMessageArray, castMessage));
 
                         // Check if a channel exists that this message needs to go to
                         if (!String.IsNullOrEmpty(castMessage.@namespace))
                         {
                             foreach (var channel in this.Channels.Where(i => i.Namespace == castMessage.@namespace))
                             {
-                                if (channel.OnMessageReceived != null)
-                                {
-                                    channel.OnMessageReceived(this, new ChromecastSSLClientDataReceivedArgs(entireMessageArray, castMessage));
-                                }
+                                channel.OnMessageReceived(new ChromecastSSLClientDataReceivedArgs(entireMessageArray, castMessage));
                             }
 
                         }
@@ -200,6 +197,11 @@ namespace NCast.Protocols.CASTV2
                     ReadPacket();
                 }
             });
+        }
+        protected void OnMessageReceived(ChromecastSSLClientDataReceivedArgs e)
+        {
+            if (MessageReceived != null)
+                MessageReceived(this, e);
         }
 
         public async Task Write(CastMessage message)
