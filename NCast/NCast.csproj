@@ -116,7 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Discovery\IDeviceDiscoveryReportItem.cs" />
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

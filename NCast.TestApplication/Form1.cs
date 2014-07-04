@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NCast.Devices;
+using NCast.Devices.Chromecast.Entities.Request;
 using NCast.Devices.Chromecast.Entities.Response;
 using NCast.Discovery;
 using NCast.Protocols.CASTV2;
+using System.Collections.Generic;
 
 namespace NCast.TestApplication
 {
@@ -87,27 +90,59 @@ namespace NCast.TestApplication
         {
             if (CurrentAggregate != null && CurrentAggregate.IsReady)
             {
+                this.CurrentApp = (AppComboBox.SelectedItem as ChromecastApp);
                 // Launch any app from the combo box
-                CurrentAggregate.Client.Write(MessageFactory.Launch((AppComboBox.SelectedItem as ChromecastApp).app_id));
+                CurrentAggregate.Client.Write(MessageFactory.Launch(CurrentApp.app_id));
 
             }
         }
 
         bool connectionAlreadySetup = false;    // temp
+        private ReceiverStatusResponse CurrentStatus;
+        private ChromecastApp CurrentApp;
 
         private void OnData(object sender, ChromecastSSLClientDataReceivedArgs e)
         {
             lstDeviceList.InvokeIfRequired(() =>
             {
                 // Added just to see how it works out to get the "type" out JSON dynamically. Will be removed.
-                Trace.WriteLine(string.Format("Responsetype: {0}",e.Message.GetJsonType()));
+                Trace.WriteLine(string.Format("Responsetype: {0}", e.Message.GetJsonType()));
+
+                if (e.Message.GetJsonType() == "RECEIVER_STATUS")
+                {
+                    ReceiverStatusResponse response = e.Message.payload_utf8.DeserializeJson<ReceiverStatusResponse>();
+                    this.CurrentStatus = response;
+                    Trace.WriteLine("current status set");
+                }
                 lstLog.Items.Add(e.Message.payload_utf8);
-                
+
             });
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+            // set destinationId == transportid
+
+            var currentAppStatus = from p in this.CurrentStatus.status.applications where (p.appId == CurrentApp.app_id) select p;
+            var curre = this.CurrentStatus.status.applications.FirstOrDefault((t) => t.appId == CurrentApp.app_id);
+
+            var customData = new Dictionary<string, string>();
+            customData.Add("title:", "BigBuckbunny");
+            customData.Add("thumb", null);
+            
+            var req = new LoadRequest(curre.sessionId, new Media(url, "video/mp4"), true, 0.0, customData);
+            Trace.WriteLine(req.ToJson());
+            CurrentAggregate.Client.Write(MessageFactory.Load(curre.transportId, req.ToJson()));
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var currentAppStatus = from p in this.CurrentStatus.status.applications where (p.appId == CurrentApp.app_id) select p;
+            var curre = this.CurrentStatus.status.applications.FirstOrDefault((t) => t.appId == CurrentApp.app_id);
+
+            CurrentAggregate.Client.Write(MessageFactory.Connect(curre.transportId));
 
         }
     }

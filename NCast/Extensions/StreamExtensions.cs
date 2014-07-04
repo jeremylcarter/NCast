@@ -36,5 +36,10 @@ namespace NCast
             }
             return data;
         }
+
+        public static T DeserializeJson<T>(this string inputString)
+        {
+            return JsonConvert.DeserializeObject<T>(inputString);
+        }
     }
 }

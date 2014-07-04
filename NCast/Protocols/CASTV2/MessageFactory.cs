@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NCast.Devices;
+using NCast.Devices.Chromecast.Entities.Request;
 
 namespace NCast.Protocols.CASTV2
 {
@@ -25,36 +27,54 @@ namespace NCast.Protocols.CASTV2
         public static CastMessage Close()
         {
             var msg = MessageFactory.Generic();
-            msg.@namespace = "urn:x-cast:com.google.cast.tp.connection";
-            msg.payload_utf8 = "{\"type\":\"CLOSE\"}";
+            msg.@namespace = DialConstants.DialConnectionUrn;
+            msg.payload_utf8 = new CloseRequest().ToJson();
             return msg;
         }
         public static CastMessage Connect()
         {
             var msg = MessageFactory.Generic();
-            msg.@namespace = "urn:x-cast:com.google.cast.tp.connection";
-            msg.payload_utf8 = "{\"type\":\"CONNECT\"}";
+            msg.@namespace = DialConstants.DialConnectionUrn;
+            msg.payload_utf8 = new ConnectRequest().ToJson();
+            return msg;
+        }
+
+        public static CastMessage Connect(string destinationId)
+        {
+            var msg = MessageFactory.Generic();
+            msg.destination_id = destinationId;
+            msg.@namespace = DialConstants.DialConnectionUrn;
+            msg.payload_utf8 = new ConnectRequest().ToJson();
             return msg;
         }
         public static CastMessage Ping()
         {
             var msg = MessageFactory.Generic();
-            msg.@namespace = "urn:x-cast:com.google.cast.tp.heartbeat";
-            msg.payload_utf8 = "{\"type\":\"PING\"}";
+            msg.@namespace = DialConstants.DialHeartbeatUrn;
+            msg.payload_utf8 = new PingRequest().ToJson();
             return msg;
         }
         public static CastMessage Status()
         {
             var msg = new CastMessage();
-            msg.@namespace = "urn:x-cast:com.google.cast.receiver";
-            msg.payload_utf8 = "{\"type\":\"GET_STATUS\"}";
+            msg.@namespace = DialConstants.DialReceiverUrn;
+            msg.payload_utf8 = new GetStatusRequest().ToJson();
             return msg;
         }
         public static CastMessage Launch(string appId)
         {
             var msg = MessageFactory.Generic();
-            msg.@namespace = "urn:x-cast:com.google.cast.receiver";
-            msg.payload_utf8 = String.Format("{{\"type\":\"LAUNCH\",\"appId\":\"{0}\",\"requestId\":1}}", appId);
+            msg.@namespace = DialConstants.DialReceiverUrn;
+            msg.payload_utf8 = new LaunchRequest(appId).ToJson();
+            return msg;
+        }
+
+        public static CastMessage Load(string destinationId, string payload)
+        {
+            var msg = MessageFactory.Generic();
+            msg.destination_id = destinationId;
+            msg.@namespace = DialConstants.DialMediaUrn;
+            msg.payload_utf8 = payload;
             return msg;
         }
 
