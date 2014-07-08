@@ -129,6 +129,15 @@ namespace NCast.Devices.Chromecast.Entities.Request
         [DataMember(Name = "contentType")]
         public string ContentType { get; set; }
 
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>
+        ///     Gets or sets the type of the stream. This can be BUFFERED, LIVE or NONE
+        /// </summary>
+        ///
+        /// <value>
+        ///     The type of the stream.
+        /// </value>
+        ///-------------------------------------------------------------------------------------------------
         [DataMember(Name = "streamType")]
         public string StreamType { get; set; }
 
@@ -146,6 +155,9 @@ namespace NCast.Devices.Chromecast.Entities.Request
             this.AutoPlay = autoPlay;
             this.CurrentTime = currentTime;
             this.Customdata = customData;
+
+            if (this.Customdata == null)
+                this.Customdata = new Dictionary<string, string>();
         }
 
         [DataMember(Name ="sessionId")]

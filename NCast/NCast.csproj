@@ -115,7 +115,7 @@
     <Compile Include="Protocols\SSDP\SSDPDeviceInformation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Discovery\IDeviceDiscoveryReportItem.cs" />
+    <Compile Include="Discovery\DeviceDiscoveryReportItem.cs" />
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>

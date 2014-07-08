@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NCast.Devices
 {
+
+    
+
     public static class DiscoveryConstants
     {
         ///-------------------------------------------------------------------------------------------------
@@ -13,7 +16,7 @@ namespace NCast.Devices
         ///     The delay used for SSDP discovery when no mDNS devices where found.
         /// </summary>
         ///-------------------------------------------------------------------------------------------------
-        public static TimeSpan SsdpInvocationDelay = TimeSpan.FromSeconds(5);
+        public static TimeSpan SsdpInvocationDelay = TimeSpan.FromSeconds(10);
         public const string OldAppList = "https://clients3.google.com/cast/chromecast/device/config";
         public const string NewAppList = "https://clients3.google.com/cast/chromecast/device/baseconfig";
     }

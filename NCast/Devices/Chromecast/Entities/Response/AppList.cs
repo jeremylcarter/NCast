@@ -36,48 +36,48 @@ namespace NCast.Devices.Chromecast.Entities.Response
     public partial class ChromecastApp
     {
 
-        [DataMember()]
+        [DataMember(Name = "use_channel")]
         public bool use_channel;
 
-        [DataMember()]
+        [DataMember(Name = "allow_empty_post_data")]
         public bool allow_empty_post_data;
 
-        [DataMember()]
-        public string app_id;
+        [DataMember(Name = "app_id")]
+        public string AppId;
 
-        [DataMember()]
+        [DataMember(Name = "url")]
         public string url;
 
-        [DataMember()]
+        [DataMember(Name = "dial_enabled")]
         public bool dial_enabled;
 
-        [DataMember()]
+        [DataMember(Name = "allow_restart")]
         public bool allow_restart;
 
-        [DataMember()]
+        [DataMember(Name = "external")]
         public bool external;
 
-        [DataMember()]
+        [DataMember(Name = "native_app")]
         public bool native_app;
 
-        [DataMember()]
+        [DataMember(Name = "dial_info")]
         public string dial_info;
 
-        [DataMember()]
+        [DataMember(Name = "command_line")]
         public string command_line;
 
-        [DataMember()]
+        [DataMember(Name = "display_name")]
         public string display_name;
 
-        [DataMember()]
+        [DataMember(Name = "uses_ipc")]
         public bool uses_ipc;
 
-        [DataMember()]
+        [DataMember(Name = "resolution_height")]
         public int resolution_height;
 
         public override string ToString()
         {
-            return display_name != null ? display_name : app_id;
+            return display_name != null ? display_name : AppId;
         }
     }
 

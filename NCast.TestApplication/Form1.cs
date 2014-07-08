@@ -14,16 +14,18 @@ namespace NCast.TestApplication
 {
     public partial class Form1 : Form
     {
-        public DeviceAggregate CurrentAggregate;
-        ChromecastDeviceDiscovery Discovery = new ChromecastDeviceDiscovery();
+        private DeviceAggregate CurrentAggregate;
+        private ReceiverStatusResponse CurrentStatus;
+        private ChromecastApp CurrentApp;
+        private ChromecastDeviceDiscovery Discovery = new ChromecastDeviceDiscovery();
         public Form1()
         {
             InitializeComponent();
-            RefreshDeviceList();
 
             Discovery.DeviceDiscovered += Discovery_DeviceDiscovered;
+            RefreshDeviceList();
 
-            ChromecastAppList.Get().ContinueWith((t) =>
+            ChromecastAppList.GetAsync().ContinueWith((t) =>
                 AppComboBox.InvokeIfRequired(() =>
                 {
                     AppComboBox.Items.AddRange(t.Result.applications);
@@ -92,14 +94,11 @@ namespace NCast.TestApplication
             {
                 this.CurrentApp = (AppComboBox.SelectedItem as ChromecastApp);
                 // Launch any app from the combo box
-                CurrentAggregate.Client.Write(MessageFactory.Launch(CurrentApp.app_id));
+                CurrentAggregate.Client.Write(MessageFactory.Launch(CurrentApp.AppId));
 
             }
         }
 
-        bool connectionAlreadySetup = false;    // temp
-        private ReceiverStatusResponse CurrentStatus;
-        private ChromecastApp CurrentApp;
 
         private void OnData(object sender, ChromecastSSLClientDataReceivedArgs e)
         {
@@ -110,39 +109,38 @@ namespace NCast.TestApplication
 
                 if (e.Message.GetJsonType() == "RECEIVER_STATUS")
                 {
-                    ReceiverStatusResponse response = e.Message.payload_utf8.DeserializeJson<ReceiverStatusResponse>();
+                    ReceiverStatusResponse response = e.Message.PayloadUtf8.DeserializeJson<ReceiverStatusResponse>();
                     this.CurrentStatus = response;
                     Trace.WriteLine("current status set");
                 }
-                lstLog.Items.Add(e.Message.payload_utf8);
+                lstLog.Items.Add(e.Message.PayloadUtf8);
 
             });
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-            // set destinationId == transportid
+             string url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+            //string url = "http://192.168.0.100/live/vp8/0/0/blub.webm";
 
-            var currentAppStatus = from p in this.CurrentStatus.status.applications where (p.appId == CurrentApp.app_id) select p;
-            var curre = this.CurrentStatus.status.applications.FirstOrDefault((t) => t.appId == CurrentApp.app_id);
+            var currentStatus = this.CurrentStatus.status.Applications.FirstOrDefault((t) => t.AppId == CurrentApp.AppId);
 
             var customData = new Dictionary<string, string>();
             customData.Add("title:", "BigBuckbunny");
             customData.Add("thumb", null);
             
-            var req = new LoadRequest(curre.sessionId, new Media(url, "video/mp4"), true, 0.0, customData);
+            var req = new LoadRequest(currentStatus.SessionId, new Media(url, null), true, 0.0, customData);
             Trace.WriteLine(req.ToJson());
-            CurrentAggregate.Client.Write(MessageFactory.Load(curre.transportId, req.ToJson()));
+            CurrentAggregate.Client.Write(MessageFactory.Load(currentStatus.TransportId, req.ToJson()));
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var currentAppStatus = from p in this.CurrentStatus.status.applications where (p.appId == CurrentApp.app_id) select p;
-            var curre = this.CurrentStatus.status.applications.FirstOrDefault((t) => t.appId == CurrentApp.app_id);
+            var currentAppStatus = from p in this.CurrentStatus.status.Applications where (p.AppId == CurrentApp.AppId) select p;
+            var curre = this.CurrentStatus.status.Applications.FirstOrDefault((t) => t.AppId == CurrentApp.AppId);
 
-            CurrentAggregate.Client.Write(MessageFactory.Connect(curre.transportId));
+            CurrentAggregate.Client.Write(MessageFactory.Connect(curre.TransportId));
 
         }
     }

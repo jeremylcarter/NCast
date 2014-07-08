@@ -9,9 +9,9 @@ namespace NCast.Devices
 {
     public class ChromecastAppList
     {
-        public static async Task<AppListRoot> Get()
+        public static async Task<AppListRoot> GetAsync()
         {
-            var jsonStream = await WebHelper.GetHttpStream(new Uri(DiscoveryConstants.NewAppList));
+            var jsonStream = await WebHelper.GetHttpStreamAsync(new Uri(DiscoveryConstants.NewAppList));
             jsonStream.Position += 4;       // Munch ")]}'\n" See https://github.com/jloutsenhizer/CR-Cast/wiki/Chromecast-Implementation-Documentation-WIP
             return jsonStream.DeSerializeJson<AppListRoot>(); 
         }

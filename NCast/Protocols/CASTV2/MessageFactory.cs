@@ -16,65 +16,65 @@ namespace NCast.Protocols.CASTV2
         {
             return new CastMessage()
             {
-                protocol_version = 0,
-                payload_type = 0,
-                payload_binary = null,
-                destination_id = "receiver-0",
-                source_id = "sender-0"
+                ProtocolVersion = 0,
+                PayloadType = 0,
+                PayloadBinary = null,
+                DestinationId = "receiver-0",
+                SourceId = "sender-0"
             };
         }
 
         public static CastMessage Close()
         {
             var msg = MessageFactory.Generic();
-            msg.@namespace = DialConstants.DialConnectionUrn;
-            msg.payload_utf8 = new CloseRequest().ToJson();
+            msg.Namespace = DialConstants.DialConnectionUrn;
+            msg.PayloadUtf8 = new CloseRequest().ToJson();
             return msg;
         }
         public static CastMessage Connect()
         {
             var msg = MessageFactory.Generic();
-            msg.@namespace = DialConstants.DialConnectionUrn;
-            msg.payload_utf8 = new ConnectRequest().ToJson();
+            msg.Namespace = DialConstants.DialConnectionUrn;
+            msg.PayloadUtf8 = new ConnectRequest().ToJson();
             return msg;
         }
 
         public static CastMessage Connect(string destinationId)
         {
             var msg = MessageFactory.Generic();
-            msg.destination_id = destinationId;
-            msg.@namespace = DialConstants.DialConnectionUrn;
-            msg.payload_utf8 = new ConnectRequest().ToJson();
+            msg.DestinationId = destinationId;
+            msg.Namespace = DialConstants.DialConnectionUrn;
+            msg.PayloadUtf8 = new ConnectRequest().ToJson();
             return msg;
         }
         public static CastMessage Ping()
         {
             var msg = MessageFactory.Generic();
-            msg.@namespace = DialConstants.DialHeartbeatUrn;
-            msg.payload_utf8 = new PingRequest().ToJson();
+            msg.Namespace = DialConstants.DialHeartbeatUrn;
+            msg.PayloadUtf8 = new PingRequest().ToJson();
             return msg;
         }
         public static CastMessage Status()
         {
             var msg = new CastMessage();
-            msg.@namespace = DialConstants.DialReceiverUrn;
-            msg.payload_utf8 = new GetStatusRequest().ToJson();
+            msg.Namespace = DialConstants.DialReceiverUrn;
+            msg.PayloadUtf8 = new GetStatusRequest().ToJson();
             return msg;
         }
         public static CastMessage Launch(string appId)
         {
             var msg = MessageFactory.Generic();
-            msg.@namespace = DialConstants.DialReceiverUrn;
-            msg.payload_utf8 = new LaunchRequest(appId).ToJson();
+            msg.Namespace = DialConstants.DialReceiverUrn;
+            msg.PayloadUtf8 = new LaunchRequest(appId).ToJson();
             return msg;
         }
 
         public static CastMessage Load(string destinationId, string payload)
         {
             var msg = MessageFactory.Generic();
-            msg.destination_id = destinationId;
-            msg.@namespace = DialConstants.DialMediaUrn;
-            msg.payload_utf8 = payload;
+            msg.DestinationId = destinationId;
+            msg.Namespace = DialConstants.DialMediaUrn;
+            msg.PayloadUtf8 = payload;
             return msg;
         }
 

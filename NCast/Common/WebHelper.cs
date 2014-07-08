@@ -24,7 +24,7 @@ namespace NCast.Common
         ///     A response stream or null if failed.
         /// </returns>
         ///-------------------------------------------------------------------------------------------------
-        public static async Task<Stream> GetHttpStream(Uri url)
+        public static async Task<Stream> GetHttpStreamAsync(Uri url)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace NCast.Common
         ///-------------------------------------------------------------------------------------------------
         public static async Task<Stream> GetHttpStream(string url)
         {
-            return await GetHttpStream(new Uri(url));
+            return await GetHttpStreamAsync(new Uri(url));
         }
     }
 }

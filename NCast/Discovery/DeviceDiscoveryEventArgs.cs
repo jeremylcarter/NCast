@@ -13,11 +13,11 @@ namespace NCast.Discovery
     ///-------------------------------------------------------------------------------------------------
     public class DeviceDiscoveryEventArgs : EventArgs
     {
-        public DeviceDiscoveryEventArgs(ChromecastDeviceDiscoveryReportItem report)
+        public DeviceDiscoveryEventArgs(DeviceDiscoveryReportItem report)
         {
             this.Report = report;
         }
 
-        public ChromecastDeviceDiscoveryReportItem Report { get; private set; }
+        public DeviceDiscoveryReportItem Report { get; private set; }
     }
 }

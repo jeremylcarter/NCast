@@ -22,7 +22,7 @@ namespace NCast.Protocols.CASTV2
 
         public async Task Write(CastMessage message)
         {
-            message.@namespace = this.Namespace;
+            message.Namespace = this.Namespace;
 
             var bytes = CastHelper.ToProto(message);
             await _client.Write(bytes);

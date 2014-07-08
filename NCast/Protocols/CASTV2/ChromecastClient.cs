@@ -163,9 +163,9 @@ namespace NCast.Protocols.CASTV2
                             OnMessageReceived(new ChromecastSSLClientDataReceivedArgs(entireMessageArray, castMessage));
 
                         // Check if a channel exists that this message needs to go to
-                        if (!String.IsNullOrEmpty(castMessage.@namespace))
+                        if (!String.IsNullOrEmpty(castMessage.Namespace))
                         {
-                            foreach (var channel in this.Channels.Where(i => i.Namespace == castMessage.@namespace))
+                            foreach (var channel in this.Channels.Where(i => i.Namespace == castMessage.Namespace))
                             {
                                 channel.OnMessageReceived(new ChromecastSSLClientDataReceivedArgs(entireMessageArray, castMessage));
                             }
