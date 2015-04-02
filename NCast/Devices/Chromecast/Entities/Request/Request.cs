@@ -88,6 +88,14 @@ namespace NCast.Devices.Chromecast.Entities.Request
     }
 
     [DataContract]
+    public class PongRequest : Request
+    {
+        public PongRequest()
+            : base("PONG")
+        { }
+    }
+
+    [DataContract]
     public class ConnectRequest : Request
     {
         public ConnectRequest() : base("CONNECT")
