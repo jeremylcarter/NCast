@@ -11,7 +11,6 @@ namespace NCast.Protocols.CASTV2
 
     public static class MessageFactory
     {
-        private static string uniqueSourceID = "client-" + new Random((int)DateTime.Now.Ticks).Next() % 9999;
 
         public static CastMessage Generic()
         {
@@ -24,6 +23,7 @@ namespace NCast.Protocols.CASTV2
                 SourceId = "sender-0"
             };
         }
+
         public static CastMessage GenericWithID(string dest = "receiver-0")
         {
             return new CastMessage()
@@ -35,6 +35,8 @@ namespace NCast.Protocols.CASTV2
                 SourceId = uniqueSourceID
             };
         }
+
+        private static string uniqueSourceID = "client-" + new Random((int)DateTime.Now.Ticks).Next() % 9999;
 
         public static CastMessage Close()
         {
@@ -50,6 +52,7 @@ namespace NCast.Protocols.CASTV2
             msg.PayloadUtf8 = new ConnectRequest().ToJson();
             return msg;
         }
+
         public static CastMessage Connect(string destinationId)
         {
             var msg = MessageFactory.GenericWithID(destinationId);
@@ -85,6 +88,20 @@ namespace NCast.Protocols.CASTV2
             msg.PayloadUtf8 = new GetAppAvailabilityRequest(new string[] { AppID }).ToJson();
             return msg;
         }
+        public static CastMessage Play(string destinationId)
+        {
+            var msg = GenericWithID(destinationId);
+            msg.Namespace = DialConstants.DialMediaUrn;
+            msg.PayloadUtf8 = new PlayRequest().ToJson();
+            return msg;
+        }
+        public static CastMessage Pause(string destinationId)
+        {
+            var msg = GenericWithID(destinationId);
+            msg.Namespace = DialConstants.DialMediaUrn;
+            msg.PayloadUtf8 = new PauseRequest().ToJson();
+            return msg;
+        }
         public static CastMessage Launch(string appId)
         {
             var msg = MessageFactory.Generic();
@@ -99,6 +116,8 @@ namespace NCast.Protocols.CASTV2
             msg.PayloadUtf8 = payload;
             return msg;
         }
+
     }
+
 
 }
