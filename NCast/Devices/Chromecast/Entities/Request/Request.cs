@@ -170,7 +170,7 @@ namespace NCast.Devices.Chromecast.Entities.Request
 
         [DataMember(Name = "title")]
         public string Title { get; set; }
-        [DataMember(Name = "subtitke")]
+        [DataMember(Name = "subtitle")]
         public string Subtitle { get; set; }
 
         [DataMember(Name = "images")]
