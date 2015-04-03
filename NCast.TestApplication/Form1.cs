@@ -125,11 +125,12 @@ namespace NCast.TestApplication
 
             var currentStatus = this.CurrentStatus.status.Applications.FirstOrDefault((t) => t.AppId == CurrentApp.AppId);
 
-            var customData = new Dictionary<string, string>();
-            customData.Add("title:", "BigBuckbunny");
-            customData.Add("thumb", null);
+             var images = new List<string>();
+            images.Add("http://upload.wikimedia.org/wikipedia/commons/c/c5/Big_buck_bunny_poster_big.jpg");
+
+            var metadata = new GenericMetadata("BigBuck bunny", "Peach Open Movie Project", images);
             
-            var req = new LoadRequest(currentStatus.SessionId, new Media(url, null), true, 0.0, customData);
+            var req = new LoadRequest(currentStatus.SessionId, new Media(url, "video/mp4", metadata), true, 0.0);
             Trace.WriteLine(req.ToJson());
             CurrentAggregate.Client.Write(MessageFactory.Load(currentStatus.TransportId, req.ToJson()));
 
